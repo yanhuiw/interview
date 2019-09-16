@@ -866,3 +866,17 @@ Hashtable的synchronized是针对整张Hash表的，即每次锁住整张表让�
 hash算法进行缓存时，如果其中一台服务器故障或者需要增加新服务器，需要变动所有缓存的位置，非常不便。
 
 做法是把对服务器数量取模改成对2^32取模。
+
+## makefile
+一个工程中的源文件不计其数，并且按类型、功能、模块分 别放在若干个目录中，makefile定义了一系列的规则来指定，哪些文件需要先编译，哪些文件需要后编译， 哪些文件需要重新编译，甚至于进行更复杂的功能操作，因为makefile就像一个Shell脚本一样，其中也可以执行操作系统的命令。make命令执行时，需要一个makefile文件，以告诉make命令需要怎么样的去编译和链接程序。
+
+makefile带来的好处就是——“自动化编译”，一旦写好，只需要一个make命令，整个工程完全自动编译，极大的提高了软件开发的效率。 make是一个命令工具，是一个解释makefile中指令的命令工具，一般来说， 大多数的IDE都有这个命令，比如：Delphi的make，Visual C++的nmake，Linux下GNU的make。可见 ，makefile都成为了一种在工程方面的编译方法。
+
+https://seisman.github.io/how-to-write-makefile/overview.html
+
+## 程序的编译和链接
+### 编译（compile）
+首先要把源文件编译成中间 代码文件，在Windows下也就是 .obj 文件，UNIX下是 .o 文件，即Object File。在编译时，编译器只检测程 序语法和函数、变量是否被声明。如果函数未被声明，编译器会给出一个警告，但可以生成Object File。
+### 链接（link）
+把大量的Object File合成执行文件。链接器会在所有的Object File中找寻函数的实现，如果找不到，那到就会报链接错误码 （Linker Error），在VC下，这种错误一般是： Link 2001错误 ，意思说是说，链接器未能找到 函数的实现。你需要指定函数的Object File。在大多数时候，由于源文件太多，编译生成的中间目标文件太多，而在链接时需要明显 地指出中间目标文件名，这对于编译很不方便。所以，我们要给中间目标文件打个包，在Windows下这种包 叫“库文件”（Library File），也就是 .lib 文件，在UNIX下，是Archive File，也就是 .a 文件。
+
